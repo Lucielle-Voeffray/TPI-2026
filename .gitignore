@@ -1,3 +1,7 @@
 .venv/
 .vscode/
-ansible/vault.yml
+vault.yml
+.vault_pass
+*.key
+*.pem
+.env

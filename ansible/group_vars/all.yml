@@ -3,5 +3,5 @@ proxmox_api_user: "{{ vault_proxmox_api_user | default('ansible@pve') }}"
 proxmox_validate_certs: false
 
 proxmox_default_node: "proxmox"
-proxmox_storage: "local-lvm"
+proxmox_storage: "vm-storage"
 proxmox_bridge: "vmbr0"

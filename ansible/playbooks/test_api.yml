@@ -1,0 +1,21 @@
+---
+- name: Tester la connexion à l'API Proxmox
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - ../vault.yml
+
+  tasks:
+    - name: Récupérer les informations du cluster
+      community.proxmox.proxmox_node_info:
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        validate_certs: "{{ proxmox_validate_certs }}"
+      register: proxmox_nodes
+
+    - name: Afficher les nœuds Proxmox
+      ansible.builtin.debug:
+        var: proxmox_nodes
