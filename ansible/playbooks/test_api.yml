@@ -1,6 +1,6 @@
 ---
 - name: Tester la connexion à l'API Proxmox
-  hosts: localhost
+  hosts: ansible-lxc
   gather_facts: false
 
   vars_files:
