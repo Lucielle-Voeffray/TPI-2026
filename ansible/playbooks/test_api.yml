@@ -27,6 +27,6 @@
         validate_certs: "{{ proxmox_validate_certs }}"
       register: proxmox_nodes
 
-    - name: Afficher les nœuds Proxmox
+    - name: Afficher les noeuds Proxmox
       ansible.builtin.debug:
         var: proxmox_nodes
