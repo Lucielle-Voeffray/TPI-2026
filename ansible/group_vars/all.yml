@@ -1,3 +1,13 @@
+#-----------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 18.05.2026
+# Version     : 0.1.0
+# Description : Variables à utiliser dans les playbooks
+#
+#-----------------------------------------------------------------
+
+---
 proxmox_api_host: "10.19.59.200"
 proxmox_api_user: "{{ vault_proxmox_api_user | default('ansible@pve') }}"
 proxmox_validate_certs: false

@@ -1,3 +1,14 @@
+
+# -------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 18.05.2026
+# Version     : 0.1.0
+# Description : Playbook pour récupérer les informations concernant
+#               les nodes proxmox
+#
+# -------------------------------------------------------------------
+
 ---
 - name: Tester la connexion à l'API Proxmox
   hosts: ansible-lxc
