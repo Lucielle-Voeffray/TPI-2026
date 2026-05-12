@@ -12,3 +12,5 @@ Ce document les questions de clarifications quant aux attentes des experts conce
 
 
 - Concernant la gestion des mots de passe. Est-ce que vous souhaiteriez que je vous transmette le mot de passe pour la base de données Keepass, et si c’est le cas, comment, sachant que ce n’est pas professionnel de le laisser en clair dans la documentation.
+
+- Est-ce que vous attendez une table des illustrations différentes de la bibliographie ?
