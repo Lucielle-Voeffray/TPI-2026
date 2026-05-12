@@ -43,12 +43,4 @@ Lors de ma première journée de TPI j'ai posé les questions suivantes à monsi
 
 - Je suis en train d'écrire le PV pour le rendez-vous avec les experts. Est-ce que je peux y noter vos réponses pour les questions que je vous ai posées hier ?
 
-> Pas reçu de réponse avant la pause de midi, je mettrai à jour quand j'en aurai une
-
-- Pour les modules impliquant la mise en place d’une infrastructure Windows Server, les élèves doivent installer des DHCPs. Est-ce de mon ressort, dans ce projet, de créer les sous-réseaux nécessaires aux élèves via Ansible ? Je demande parce que je n'ai pas vu de telles mentions dans le cahier des charges mais il serait possible d'en déduire le besoin, comme je connais le contenu des modules.
-
-> 
-
-- Serait-il possible d’utiliser les ports fibre des Nutanix et du switch concernant le stockage ?
-
-> 
+> Notez les plutôt dans le journal de travail
