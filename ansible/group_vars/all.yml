@@ -1,17 +1,29 @@
-#-----------------------------------------------------------------
+# -----------------------------------------------------------------
 #
 # Autrice     : Lucielle Anya Alita Ahsoka Voeffray
 # Date        : 18.05.2026
 # Version     : 0.1.0
 # Description : Variables à utiliser dans les playbooks
 #
-#-----------------------------------------------------------------
+# -----------------------------------------------------------------
 
 ---
-proxmox_api_host: "10.19.59.200"
+proxmox_api_hosts:
+  - 10.19.59.11
+  - 10.19.59.12
+  - 10.19.59.13
+  - 10.19.59.14
+  - 10.19.59.15
+  - 10.19.59.16
+
+proxmox_api_host: 10.19.59.11
 proxmox_api_user: "{{ vault_proxmox_api_user | default('ansible@pve') }}"
+proxmox_api_token_secret: "{{ vault_proxmox_api_token_secret }}"
+proxmox_api_token_id: "{{ vault_proxmox_api_token_id }}"
+proxmox_api_port: 8006
+
 proxmox_validate_certs: false
 
-proxmox_default_node: "proxmox"
-proxmox_storage: "vm-storage"
-proxmox_bridge: "vmbr0"
+proxmox_default_node: "a41-srv-01"
+proxmox_storage: "vm_storage"
+proxmox_bridge: "vmnet1"

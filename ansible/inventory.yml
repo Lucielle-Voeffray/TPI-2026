@@ -8,15 +8,18 @@
 #-----------------------------------------------------------------
 
 ---
- all:
-   hosts:
-    ansible-lxc:
-      ansible_host: 10.19.59.10
-      ansible_user: ansible
-      ansible_connection: ssh
-      ansible_ssh_private_key_file: ~/.ssh/git-pro
-      ansible_python_interpreter: /home/ansible/TPI-2026/.venv/bin/python3
+all:
+  children:
+    ansible_controller:
+      hosts:
+        ansible-lxc:
+          ansible_host: 10.19.59.50
+          ansible_user: ansible
+          ansible_connection: ssh
+          ansible_python_interpreter: /home/ansible/tpi-2026/.venv/bin/python3
 
-    localhost:
-      ansible_connection: local
-      ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    local:
+      hosts:
+        localhost:
+          ansible_connection: local
+          ansible_python_interpreter: "{{ ansible_playbook_python }}"
