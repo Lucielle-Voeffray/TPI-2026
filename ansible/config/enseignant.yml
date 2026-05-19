@@ -1,0 +1,27 @@
+# -------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 19.05.2026
+# Version     : 0.1.0
+# Description : Fichier de config des enseignants
+#
+# -------------------------------------------------------------------
+
+# NomPrénom, afin d'attribuer les VMs aux enseignants
+vmconf_teacher_username: "VoeffrayLucielle"
+
+# Classe à laquelle les VM sont dédiées
+vmconf_class: "INFO-BI32"
+
+# Module enseigné
+vmconf_module: "R01d"
+
+# Nombre de VM à créer
+vmconf_nbr_vm: 6
+
+# Utilisateur Administrateur du server et son mot de passe
+vmconf_user: "adm-emf"
+vmconf_password: "Emf12345"
+
+# VMNet à utiliser pour le déploiement (VMNet1 ou VMNet2)
+vmconf_vmnet: "VMNet1"

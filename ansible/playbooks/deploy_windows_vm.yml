@@ -1,0 +1,71 @@
+# -------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 18.05.2026
+# Version     : 0.1.0
+# Description : Playbook pour créer une VM basé sur le template win2k25
+#
+# -------------------------------------------------------------------
+
+---
+- name: Créer une VM à partir du template win2k25
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - ../group_vars/all.yml
+    - ../group_vars/vault.yml
+    - ../config/enseignant.yml
+
+  vars:
+    vmname_separator: "{{ proxmox_vm_name_separator }}"
+    vmname_parts:
+      - "{{ vmconf_module }}"
+      - "{{ vmconf_class }}"
+      - "vm"
+      - "win2k25"
+      - "{{ vmconf_teacher_username }}"
+
+  tasks:
+
+    - name: Cloner la VM
+      community.proxmox.proxmox.kvm:
+        # Informations de connexion à proxmox
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+
+        # Annonce quant à la node à utiliser
+        node: "{{ proxmox_nodes[(item - 1) % (proxmox_nodes | length)] }}"
+
+        # ID du template à cloner
+        clone: "{{ proxmox_template_2k25 }}"
+        full: true
+        
+        # Nom de la VM, n'est pas unique, il sert à retrouver les VM à détruire
+        name: "{{ (vmname_parts + ['%02d' | format(item)]) | join(vmname_separator) }}"
+
+        # Définir le network à utiliser
+        net:
+          net0: "virtio,bridge={{ vmconf_vmnet }}"
+
+        # Informations pour Cloudbase-init
+        ciuser: "{{ vmconf_user }}"
+        cipassword: "{{ vmconf_password }}"
+        ipconfig:
+          ipconfig0: "ip=dhcp"
+
+        # Utiliser le stockage prévu pour les VMs
+        storage: "{{ proxmox_storage }}"
+
+        # tags pour retrouver les VMs plus facilement
+        tags:
+          - "{{ vmconf_module }}"
+          - "{{ vmconf_class }}"
+          - "{{ vmconf_teacher_username }}"
+        
+        # Demander à ce que la VM soit existente avant de passer à la prochaine
+        # VM
+        state: present
+      loop: "{{ range(1, vmconf_nbr_vm | int + 1) | list }}"
