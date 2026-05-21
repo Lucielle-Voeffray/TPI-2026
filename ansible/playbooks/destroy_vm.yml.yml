@@ -1,0 +1,101 @@
+# -------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 21.05.2026
+# Version     : 0.1.0
+# Description : Playbook pour créer une VM basé sur le template win2k25
+#
+# -------------------------------------------------------------------
+---
+- name: Détruire les VMs d'un enseignant selon leurs tags
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - ../config/enseignant.yml
+    - ../group_vars/vault.yml
+
+  vars:
+    confirm_destroy: false
+
+  tasks:
+    - name: Créer la liste des tags
+      ansible.builtin.set_fact:
+        vm_tags:
+          - "{{ vmconf_module | lower }}"
+          - "{{ vmconf_class | lower }}"
+          - "{{ vmconf_teacher_username | lower }}"
+
+    - name: Récupérer toutes les VMs avec leur configuration actuelle
+      community.proxmox.proxmox_vm_info:
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        validate_certs: "{{ proxmox_validate_certs }}"
+        type: qemu
+        config: current
+      register: proxmox_vm_info
+
+    - name: Initialiser la liste des VMs à détruire
+      ansible.builtin.set_fact:
+        vms_to_destroy: []
+
+    - name: Trouver les VMs qui possèdent tous les tags demandés
+      ansible.builtin.set_fact:
+        vms_to_destroy: "{{ vms_to_destroy + [item] }}"
+      loop: "{{ proxmox_vm_info.proxmox_vms }}"
+      vars:
+        current_tags: "{{ (item.config.tags | default('')).split(';') }}"
+      when:
+        - item.template | default(false) == false
+        - vm_tags | difference(current_tags) | length == 0
+
+    - name: Afficher les VMs qui seront détruites
+      ansible.builtin.debug:
+        msg: >-
+          VMID={{ item.vmid }},
+          name={{ item.name }},
+          node={{ item.node }},
+          tags={{ item.config.tags | default('aucun') }},
+          status={{ item.status }}
+      loop: "{{ vms_to_destroy }}"
+
+    - name: Sécurité - refuser la destruction sans confirmation
+      ansible.builtin.assert:
+        that:
+          - confirm_destroy | bool
+        fail_msg: >-
+          Des VMs correspondent aux tags, mais confirm_destroy=false.
+          Relance avec -e confirm_destroy=true si tu veux vraiment les supprimer.
+      when: vms_to_destroy | length > 0
+
+    - name: Stopper les VMs avant suppression
+      community.proxmox.proxmox_kvm:
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        validate_certs: false
+
+        node: "{{ item.node }}"
+        vmid: "{{ item.vmid }}"
+        state: stopped
+        force: true
+        timeout: 120
+      loop: "{{ vms_to_destroy }}"
+      when: vms_to_destroy | length > 0
+
+    - name: Supprimer les VMs
+      community.proxmox.proxmox_kvm:
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        validate_certs: false
+
+        node: "{{ item.node }}"
+        vmid: "{{ item.vmid }}"
+        state: absent
+      loop: "{{ vms_to_destroy }}"
+      when: vms_to_destroy | length > 0

@@ -1,0 +1,40 @@
+---
+- name: Créer une VM à partir du template win2k25
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - ../group_vars/all.yml
+    - ../group_vars/vault.yml
+    - ../config/enseignant.yml
+
+  vars:
+    vmname_separator: "{{ proxmox_vm_name_separator }}"
+    vmname_parts:
+      - "{{ vmconf_module }}"
+      - "{{ vmconf_class }}"
+      - "vm"
+      - "win2k25"
+      - "{{ vmconf_teacher_username }}"
+
+  tasks:
+
+    - name: debug
+      community.proxmox.proxmox_kvm:
+        api_host: "{{ proxmox_api_host }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        validate_certs: "{{ proxmox_validate_certs }}"
+
+        node: "a41-srv-01"
+
+        vmid: "{{ proxmox_template_2k25 | int }}"
+        clone: "tpi-vr3-template-winserv25-voeffraylucielle"
+        newid: 9001
+        name: "test-clone-ansible"
+        full: true
+        storage: "{{ proxmox_storage }}"
+        pool: "{{ proxmox_pool }}"
+
+        state: present

@@ -31,6 +31,7 @@ proxmox_nodes:
 proxmox_default_node: "a41-srv-01"
 proxmox_storage: "vm_storage"
 proxmox_default_bridge: "vmnet1"
+proxmox_pool: "ansible-vms"
 proxmox_state: started
 
 proxmox_template_2k25: 101

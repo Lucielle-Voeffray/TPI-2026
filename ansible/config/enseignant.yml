@@ -17,11 +17,18 @@ vmconf_class: "INFO-BI32"
 vmconf_module: "R01d"
 
 # Nombre de VM à créer
-vmconf_nbr_vm: 6
+vmconf_nbr_vm: 3
 
 # Utilisateur Administrateur du server et son mot de passe
-vmconf_user: "adm-emf"
+vmconf_user: "Administrator"
 vmconf_password: "Emf12345"
 
-# VMNet à utiliser pour le déploiement (VMNet1 ou VMNet2)
+# Enlever le # si vous voulez utiliser le VMNet1
 vmconf_vmnet: "VMNet1"
+vmconf_subnet: "10.19.56"
+vmconf_gateway: "10.19.56.1"
+
+# Enlever le # si vous voulez utiliser le VMNet2
+#vmconf_vmnet: "VMNet2"
+#vmconf_subnet: "10.19.57"
+#vmconf_gateway: "10.19.57.1"

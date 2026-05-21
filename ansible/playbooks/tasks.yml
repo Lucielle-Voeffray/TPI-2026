@@ -1,34 +1,5 @@
-# -------------------------------------------------------------------
-#
-# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
-# Date        : 18.05.2026
-# Version     : 0.10.0
-# Description : Playbook pour créer une VM basé sur le template win2k25
-#
-# -------------------------------------------------------------------
-
 ---
-- name: Créer une VM à partir du template win2k25
-  hosts: localhost
-  gather_facts: false
-
-  vars_files:
-    - ../group_vars/all.yml
-    - ../group_vars/vault.yml
-    - ../config/enseignant.yml
-
-  vars:
-    vmname_separator: "{{ proxmox_vm_name_separator }}"
-    vmname_parts:
-      - "{{ vmconf_module }}"
-      - "{{ vmconf_class }}"
-      - "vm"
-      - "win2k25"
-      - "{{ vmconf_teacher_username }}"
-
-  tasks:
-
-    - name: Cloner la VM
+- name: Cloner la VM
       community.proxmox.proxmox_kvm:
         # Informations de connexion à proxmox
         api_host: "{{ proxmox_api_host }}"
@@ -77,4 +48,3 @@
         state: present
 
         timeout: 900
-      loop: "{{ range(1, vmconf_nbr_vm | int + 1) | list }}"
