@@ -17,7 +17,8 @@ vmconf_class: "INFO-BI32"
 vmconf_module: "R01d"
 
 # Nombre de VM à créer
-vmconf_nbr_vm: 3
+vmconf_nbr_vm: 100
+vmconf_first_vmid: 5000
 
 # Utilisateur Administrateur du server et son mot de passe
 vmconf_user: "Administrator"

@@ -28,7 +28,8 @@ proxmox_nodes:
   - "a41-srv-01"
   - "a41-srv-02"
   - "a41-srv-03"
-proxmox_default_node: "a41-srv-01"
+
+proxmox_template_node: "a41-srv-01"
 proxmox_storage: "vm_storage"
 proxmox_default_bridge: "vmnet1"
 proxmox_pool: "ansible-vms"
