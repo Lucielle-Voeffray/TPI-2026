@@ -8,7 +8,7 @@
 # -------------------------------------------------------------------
 
 ---
-- name: Créer une VM à partir du template win2k25
+- name: Créer une VM à partir du template win2k22
   hosts: localhost
   gather_facts: false
 
@@ -23,7 +23,7 @@
       - "{{ vmconf_module }}"
       - "{{ vmconf_class }}"
       - "vm"
-      - "win2k25"
+      - "win2k22"
       - "{{ vmconf_teacher_username }}"
 
   tasks:

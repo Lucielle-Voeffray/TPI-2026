@@ -106,3 +106,7 @@
 
     max_restart: 1
     max_relocate: 1
+
+- name: Attendre une minute avant la prochaine VM
+  ansible.builtin.pause:
+    seconds: 10
