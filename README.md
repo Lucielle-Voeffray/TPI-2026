@@ -17,11 +17,11 @@ J'essaie d'éviter de devoir régler des conflits tout du long de la réalisatio
 
 ### main
 
-Ne contient rien à jour. Ne pas utiliser cette branche comme source d'information
+Contient l'état du projet.
 
 ### ansible
 
-Contient le code à la dernière sauvegarde, qui se fait à minima deux fois par jour.
+Etat de la partie automatisation du projet au 29.05.2026 à 8h40. La branche a été merged à la branche main à ce moment et n'est plus utilisée
 
 > [!Warning]
 > Avant le début de la réalisation, la branche ansible contient le code que j'ai écrit pendant la semaine de test technologiques, avant le TPI.
@@ -29,4 +29,4 @@ Contient le code à la dernière sauvegarde, qui se fait à minima deux fois par
 
 ### documentation
 
-Cette branche contient tout la documentation concernant le projet.
+Etat de la partie Documentation du projet au 29.05.2026 à 8h40. La branche a été merged à la branche main à ce moment et n'est plus utilisée
