@@ -1,0 +1,53 @@
+# -------------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 22.05.2026
+# Version     : 0.1.3
+# Description : Liste des tâches à effectuer pour détruire une VM
+#               Cette liste est appelée par le playbook "destroy_vm"
+#
+# -------------------------------------------------------------------------
+
+---
+- name: Retirer la VM de la haute disponibilité
+  community.proxmox.proxmox_cluster_ha_resources:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    name: "vm:{{ vm_to_destroy.vmid }}"
+    state: absent
+    api_timeout: 60
+
+- name: Arrêter la VM
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    node: "{{ vm_to_destroy.node }}"
+    vmid: "{{ vm_to_destroy.vmid | int }}"
+
+    state: stopped
+    force: true
+    timeout: 180
+    api_timeout: 60
+
+- name: Détruire la VM et nettoyer ses références
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    node: "{{ vm_to_destroy.node }}"
+    vmid: "{{ vm_to_destroy.vmid | int }}"
+
+    state: absent
+    purge: true
+    api_timeout: 60

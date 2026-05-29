@@ -1,0 +1,38 @@
+# -------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 18.05.2026
+# Version     : 0.10.0
+# Description : Playbook pour créer une VM basé sur le template win2k25
+#
+# -------------------------------------------------------------------
+
+---
+- name: Créer une VM à partir du template win2k22
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - ../group_vars/all.yml
+    - ../group_vars/vault.yml
+    - ../config/enseignant.yml
+
+  vars:
+    vmname_separator: "{{ proxmox_vm_name_separator }}"
+    vmname_parts:
+      - "{{ vmconf_module }}"
+      - "{{ vmconf_class }}"
+      - "vm"
+      - "win2k22"
+      - "{{ vmconf_teacher_username }}"
+
+  tasks:
+
+    - name: Cloner la VM
+      ansible.builtin.include_tasks: tasks/tasks_create_vm.yml
+      loop: "{{ range(1, vmconf_nbr_vm | int + 1) | list }}"
+      loop_control:
+        loop_var: vm_number
+        label: "VM numéro {{ vm_number }}"
+      vars:
+        current_vm_node: "{{ proxmox_nodes[(vm_number - 1 ) % (proxmox_nodes | length)] }}"
