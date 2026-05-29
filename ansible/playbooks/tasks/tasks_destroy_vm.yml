@@ -1,3 +1,13 @@
+# -------------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 22.05.2026
+# Version     : 0.1.3
+# Description : Liste des tâches à effectuer pour détruire une VM
+#               Cette liste est appelée par le playbook "destroy_vm"
+#
+# -------------------------------------------------------------------------
+
 ---
 - name: Retirer la VM de la haute disponibilité
   community.proxmox.proxmox_cluster_ha_resources:

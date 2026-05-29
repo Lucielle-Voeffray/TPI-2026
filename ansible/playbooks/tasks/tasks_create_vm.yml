@@ -1,3 +1,13 @@
+# -------------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 22.05.2026
+# Version     : 0.1.7
+# Description : Liste des tâches à effectuer pour créer une VM
+#               Cette liste est appelée par le playbook "deploy_windows_vm"
+#
+# -------------------------------------------------------------------------
+
 ---
 
 - name: Cloner la VM
