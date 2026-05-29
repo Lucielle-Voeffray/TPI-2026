@@ -9,25 +9,22 @@
 
 ---
 proxmox_api_hosts:
-  - 10.19.59.11
-  - 10.19.59.12
-  - 10.19.59.13
-  - 10.19.59.14
-  - 10.19.59.15
-  - 10.19.59.16
-
-proxmox_api_host: 10.19.59.11
-proxmox_api_user: "{{ vault_proxmox_api_user | default('ansible@pve') }}"
-proxmox_api_token_secret: "{{ vault_proxmox_api_token_secret }}"
-proxmox_api_token_id: "{{ vault_proxmox_api_token_id }}"
-proxmox_api_port: 8006
-
-proxmox_validate_certs: false
+  - 10.19.59.240
+  - 10.19.59.241
+  - 10.19.59.242
 
 proxmox_nodes:
   - "a41-srv-01"
   - "a41-srv-02"
   - "a41-srv-03"
+
+proxmox_api_host: 10.19.59.240
+proxmox_api_port: 8006
+proxmox_validate_certs: false
+
+proxmox_api_user: "{{ vault_proxmox_api_user }}"
+proxmox_api_token_secret: "{{ vault_proxmox_api_token_secret }}"
+proxmox_api_token_id: "{{ vault_proxmox_api_token_id }}"
 
 proxmox_template_node: "a41-srv-01"
 proxmox_storage: "vm_storage"
