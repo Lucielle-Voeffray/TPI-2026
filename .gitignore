@@ -1,7 +1,8 @@
 .venv/
 .vscode/
-vault.yml
 .vault_pass
 *.key
 *.pem
 .env
+secrets/
+*.zip

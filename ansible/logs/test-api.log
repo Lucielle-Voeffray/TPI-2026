@@ -1,0 +1,340 @@
+
+PLAY [Tester la connexion à l'API Proxmox] *************************************
+
+TASK [Récupérer les informations du cluster] ***********************************
+ok: [localhost]
+
+TASK [Afficher les noeuds Proxmox] *********************************************
+ok: [localhost] => {
+    "proxmox_nodes": {
+        "changed": false,
+        "failed": false,
+        "proxmox_nodes": [
+            {
+                "id": "node/a41-srv-03",
+                "level": "",
+                "network": [
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbc9b"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic3",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 6,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f0",
+                            "ens15f0",
+                            "enxac1f6b1ccfa8"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic0",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 3,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f1",
+                            "ens15f1",
+                            "enxac1f6b1ccfa9"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic1",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 4,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enp134s0f1",
+                            "enx00e0ed5cbc9d"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic5",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 8,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enp134s0f0",
+                            "enx00e0ed5cbc9c"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic4",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 7,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbc9a"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic2",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 5,
+                        "type": "eth"
+                    }
+                ],
+                "node": "a41-srv-03",
+                "ssl_fingerprint": "D9:C5:FF:76:65:1B:0F:62:99:4E:08:EE:98:2A:81:51:B7:17:A5:25:50:C9:E1:CC:17:89:13:89:FF:9A:AA:01",
+                "status": "online",
+                "type": "node",
+                "version": {
+                    "release": "9.1",
+                    "repoid": "42db4a6cf33dac83",
+                    "version": "9.1.1"
+                }
+            },
+            {
+                "id": "node/a41-srv-01",
+                "level": "",
+                "network": [
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbc59"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic3",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 6,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f1",
+                            "ens15f1",
+                            "enxac1f6b1cd00d"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic1",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 4,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbc58"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic2",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 5,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enp134s0f0",
+                            "enx00e0ed5cbc5a"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic4",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 7,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enp134s0f1",
+                            "enx00e0ed5cbc5b"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic5",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 8,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f0",
+                            "ens15f0",
+                            "enxac1f6b1cd00c"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic0",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 3,
+                        "type": "eth"
+                    }
+                ],
+                "node": "a41-srv-01",
+                "ssl_fingerprint": "47:14:78:7C:F5:8E:4B:DB:4C:2D:F1:62:42:9A:5D:73:DE:DE:34:54:FA:BF:98:57:B5:2C:C4:C1:FC:BC:F8:D5",
+                "status": "online",
+                "type": "node",
+                "version": {
+                    "release": "9.1",
+                    "repoid": "8eac2c86f015bdda",
+                    "version": "9.1.11"
+                }
+            },
+            {
+                "id": "node/a41-srv-02",
+                "level": "",
+                "network": [
+                    {
+                        "altnames": [
+                            "enp134s0f0",
+                            "enx00e0ed5cbcac"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic4",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 7,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enp134s0f1",
+                            "enx00e0ed5cbcad"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic5",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 8,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbcab"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic3",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 6,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f0",
+                            "ens15f0",
+                            "enxac1f6b1ccfb8"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic0",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 3,
+                        "type": "eth"
+                    },
+                    {
+                        "altnames": [
+                            "enx00e0ed5cbcaa"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic2",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 5,
+                        "type": "eth"
+                    },
+                    {
+                        "active": 1,
+                        "altnames": [
+                            "enp3s0f1",
+                            "ens15f1",
+                            "enxac1f6b1ccfb9"
+                        ],
+                        "exists": 1,
+                        "families": [
+                            "inet"
+                        ],
+                        "iface": "nic1",
+                        "method": "manual",
+                        "method6": "manual",
+                        "priority": 4,
+                        "type": "eth"
+                    }
+                ],
+                "node": "a41-srv-02",
+                "ssl_fingerprint": "54:31:2A:AC:1D:23:D0:4C:0F:D6:D6:09:C2:7F:ED:27:3C:DB:6D:43:A9:02:B1:A2:3B:A8:03:56:A0:CB:B0:55",
+                "status": "online",
+                "type": "node",
+                "version": {
+                    "release": "9.1",
+                    "repoid": "8eac2c86f015bdda",
+                    "version": "9.1.11"
+                }
+            }
+        ]
+    }
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
