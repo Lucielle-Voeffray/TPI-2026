@@ -4,5 +4,6 @@
 *.key
 *.pem
 .env
+~*
 secrets/
 *.zip
