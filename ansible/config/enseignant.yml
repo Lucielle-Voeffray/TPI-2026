@@ -16,7 +16,7 @@ vmconf_class: "INFO-BI32"
 # Module enseigné
 vmconf_module: "R01d"
 
-# Nombre de VM à créer
+# Nombre de VM à créer et le 1er VMid a utiliser
 vmconf_nbr_vm: 25
 vmconf_first_vmid: 5000
 

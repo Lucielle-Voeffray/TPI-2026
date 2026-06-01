@@ -94,14 +94,92 @@ VMs dans le pool `ansible-vms`. Pas d'accès graphique
 
 ## Utilisation
 
-### Concepts
-
 ### Mise en place
+
+#### SSH - LXC
+
+La méthode la plus simple pout l'utilisation de cette codebase est de se
+connecter au LXC qui se trouve dans le cluster. La codebase y est déjà pull, il
+ne reste qu'à créer le fichier de configuration et lancer le venv avant de
+lancer les playbooks.
+
+#### Linux distro
+
+Si vous avez un VM Linux ou un ordinateur sous Linux, vous pouvez installer
+Python3:
+
+```bash
+yay -S python # Pour Arch Linux
+```
+
+Clone le repository:
+
+```bash
+git clone https://github.com/Lucielle-Voeffray/TPI-2026.git tpi-2026/
+```
+
+De se déplacer dans le dossier:
+
+```bash
+cd tpi-2026/ansible
+```
+
+Créer le venv:
+
+```bash
+python3 -m venv .venv
+```
+
+Activer le venv:
+
+```bash
+.venv/bin/activate
+```
+
+Installer Ansible et les dépendences du projet:
+
+```bash
+pip install proxmoxer requests ansible
+ansible-galaxy collection install -r requirements.yml
+
+```
+
+Une fois la codebase en place, il faut créer le fichier de configuration
 
 ### Fichier de configuration
 
+Le fichier de configuration se trouve dans ./config/enseignant.yml
+
+Les commentaires dans le fichier indique comment le remplir.
+
 ### Lancer un playbook
+
+Une fois la configuration prête, lancer les playbooks avec les commandes
+suivantes
 
 #### Créer les VMs
 
+Créer les VMs est on ne peut plus simple:
+
+```bash
+ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass
+```
+
+Le vault-pass est stocké dans la base de données keepass, veuillez vous référer
+à l'administrateur système pour y avoir accès.
+
 #### Supprimer les VMs
+
+Les détruire est autant plus simple:
+
+Dry-run:
+
+```bash
+ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass
+```
+
+Run:
+
+```bash
+ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass -e confirm_destroy=true
+```
