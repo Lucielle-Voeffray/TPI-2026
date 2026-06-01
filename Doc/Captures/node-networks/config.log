@@ -1,0 +1,77 @@
+for node in a41-srv-01 a41-srv-02 a41-srv-03; do
+  echo "===== $node ====="
+  pvesh get /nodes/$node/network --output-format yaml | grep -E "iface:|type:|bridge_ports:|bridge_vlan_aware:|bridge_vids:|cidr:"
+  echo
+done
+
+===== a41-srv-01 =====
+  bridge_ports: nic0
+  bridge_vids: 280-282
+  bridge_vlan_aware: 1
+  cidr: 10.19.59.240/24
+  iface: vmbr0
+  type: bridge
+  iface: nic1
+  type: eth
+  iface: nic4
+  type: eth
+  iface: nic2
+  type: eth
+  bridge_ports: nic1
+  cidr: 10.19.58.11/24
+  iface: vmbr1
+  type: bridge
+  iface: nic5
+  type: eth
+  iface: nic3
+  type: eth
+  iface: nic0
+  type: eth
+
+===== a41-srv-02 =====
+  iface: nic2
+  type: eth
+  bridge_ports: nic1
+  cidr: 10.19.58.13/24
+  iface: vmbr1
+  type: bridge
+  iface: nic5
+  type: eth
+  bridge_ports: nic0
+  bridge_vids: 280-282
+  bridge_vlan_aware: 1
+  cidr: 10.19.59.241/24
+  iface: vmbr0
+  type: bridge
+  iface: nic0
+  type: eth
+  iface: nic4
+  type: eth
+  iface: nic1
+  type: eth
+  iface: nic3
+  type: eth
+
+===== a41-srv-03 =====
+  iface: nic2
+  type: eth
+  iface: nic3
+  type: eth
+  iface: nic4
+  type: eth
+  iface: nic5
+  type: eth
+  iface: nic0
+  type: eth
+  bridge_ports: nic0
+  bridge_vids: 280-283
+  bridge_vlan_aware: 1
+  cidr: 10.19.59.242/24
+  iface: vmbr0
+  type: bridge
+  iface: nic1
+  type: eth
+  bridge_ports: nic1
+  cidr: 10.19.58.15/24
+  iface: vmbr1
+  type: bridge
