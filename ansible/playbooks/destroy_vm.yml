@@ -2,7 +2,7 @@
 #
 # Autrice     : Lucielle Anya Alita Ahsoka Voeffray
 # Date        : 22.05.2026
-# Version     : 0.1.0
+# Version     : 0.2.0
 # Description : Playbook pour détruire les VMs correspondant aux
 #               tags définis dans la configuration enseignant
 #
@@ -13,11 +13,13 @@
   hosts: localhost
   gather_facts: false
 
+  # Charger les différents fichiers de configuration
   vars_files:
     - ../group_vars/all.yml
     - ../group_vars/vault.yml
     - ../config/enseignant.yml
 
+  # Récupérer les variables des fichiers de configuration
   vars:
     vm_required_tags:
       - "{{ vmconf_module | lower }}"
@@ -26,6 +28,7 @@
 
   tasks:
     - name: Récupérer les machines virtuelles présentes dans le cluster
+      # Informations de connexion à proxmox
       community.proxmox.proxmox_vm_info:
         api_host: "{{ proxmox_api_host }}"
         api_user: "{{ proxmox_api_user }}"
