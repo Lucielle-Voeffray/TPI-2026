@@ -48,16 +48,60 @@ gérer.
 
 ![EULA](./Captures/installation/2.png)
 
+3) Choisir le disque d'installation
+
+Si le noeud est un Nutanix, il devrait y avoir un disque plus petit que les
+autres
+
+![Choix disque](./Captures/installation/3.png)
+
+4) Choisir la locale et le clavier
+
+![Locale](./Captures/installation/5.png)
+
+5) Définir le réseau
+
+Remplir selon la tableau fourni plus haut.
+L'interface réseau devrait être la nic0, sur laquel le trunk des VLans 280-282
+et le VLan 283 non tagué.
+
+![Réseau](./Captures/installation/5.png)
+
+6) Résumé d'installation
+
+Contrôller les installations et lancer l'installation
+
+![installation](./Captures/installation/6.png)
+
 #### Configurer le réseau
+
+Pour les configuration réseau, vous trouverez les commandes à lancer dans la
+documentation de réalisation du projet.
 
 #### Rejoindre le cluster
 
+Afin de rejoindre la node au cluster il faut se connecter à un noeud qui est
+déjà dans le cluster, sous datacenter --> cluster, il devrait y avoir un bouton
+"join information". Copier ces information, puis les coller dans le même menu
+mais le nouveau noeud.
+
 ### Utilisateurs et accès
+
+A l'heure actuelle il y a deux utilisateurs:
+root --> Accès à tout vian l'interface graphique
+ansible --> Accès pour la codebase Ansible, ne peux que créer et détruire des
+VMs dans le pool `ansible-vms`. Pas d'accès graphique
 
 ## Utilisation
 
 ### Concepts
 
-### 
-
 ### Mise en place
+
+### Fichier de configuration
+
+### Lancer un playbook
+
+#### Créer les VMs
+
+#### Supprimer les VMs
