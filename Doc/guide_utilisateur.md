@@ -88,7 +88,7 @@ mais le nouveau noeud.
 ### Utilisateurs et accès
 
 A l'heure actuelle il y a deux utilisateurs:
-root --> Accès à tout vian l'interface graphique
+root --> Accès à tout via l'interface graphique
 ansible --> Accès pour la codebase Ansible, ne peux que créer et détruire des
 VMs dans le pool `ansible-vms`. Pas d'accès graphique
 
