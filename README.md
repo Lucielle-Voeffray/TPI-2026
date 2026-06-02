@@ -8,8 +8,8 @@ Il existe trois branches:
 
 ```
 main
-|- ansible
-|- documentation
+├─ ansible
+└─ documentation
 ```
 
 Ce fonctionnement en branches séparées me permet de developper sur une VM linux, étant donné qu'il n'est pas permis d'installer Windows Subsystem Linux sur les PCs de l'état.
