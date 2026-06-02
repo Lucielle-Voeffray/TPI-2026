@@ -183,3 +183,8 @@ Run:
 ```bash
 ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass -e confirm_destroy=true
 ```
+
+### Garder des logs
+
+Si vous souhaitez garder des logs de ce qui est créé, vous pouvez ajouter `>
+logs/<nom_du_fichier_de_log>.log` à la fin des commandes entionnées au dessus.
