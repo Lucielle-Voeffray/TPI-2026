@@ -1,0 +1,3 @@
+# En cas de réussite, la commande ne donne rien en retour
+
+ha-manager migrate ct:100 a41-srv-02

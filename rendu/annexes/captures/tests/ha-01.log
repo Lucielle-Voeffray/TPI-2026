@@ -1,0 +1,10 @@
+ha-manager status
+
+quorum OK
+master a41-srv-01 (active, Mon Jun  1 08:49:25 2026)
+fencing armed (CRM watchdog active)
+lrm a41-srv-01 (active, watchdog active, Mon Jun  1 08:49:24 2026)
+lrm a41-srv-02 (idle, watchdog standby, Mon Jun  1 08:49:29 2026)
+lrm a41-srv-03 (idle, watchdog standby, Mon Jun  1 08:49:29 2026)
+service ct:100 (a41-srv-01, started)
+service vm:101 (a41-srv-01, disabled)

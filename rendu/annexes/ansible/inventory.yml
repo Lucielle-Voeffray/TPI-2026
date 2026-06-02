@@ -1,0 +1,25 @@
+#-----------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 18.05.2026
+# Version     : 0.1.6
+# Description : Fichier d'inventaire pour ansible
+#
+#-----------------------------------------------------------------
+
+---
+all:
+  children:
+    ansible_controller:
+      hosts:
+        ansible-lxc:
+          ansible_host: 10.19.59.50
+          ansible_user: ansible
+          ansible_connection: ssh
+          ansible_python_interpreter: /home/ansible/tpi-2026/.venv/bin/python3
+
+    local:
+      hosts:
+        localhost:
+          ansible_connection: local
+          ansible_python_interpreter: "{{ ansible_playbook_python }}"

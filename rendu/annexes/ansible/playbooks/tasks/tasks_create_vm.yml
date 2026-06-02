@@ -1,0 +1,153 @@
+# -------------------------------------------------------------------------
+#
+# Autrice     : Lucielle Anya Alita Ahsoka Voeffray
+# Date        : 22.05.2026
+# Version     : 0.2.0
+# Description : Liste des tâches à effectuer pour créer une VM
+#               Cette liste est appelée par le playbook "deploy_windows_vm"
+#
+# -------------------------------------------------------------------------
+
+---
+
+- name: Cloner la VM
+  community.proxmox.proxmox_kvm:
+    # Informations de connexion à proxmox
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    # Annonce quant à la node à utiliser
+    node: "{{ proxmox_template_node }}"
+
+    # La nouvelle VM doit être créée sur ce nœud
+    target: "{{ current_vm_node }}"
+
+    # ID du template à cloner
+    clone: true
+    vmid: "{{ proxmox_template_2k25 | int }}"
+    full: false
+
+    # Nom de la VM, est unique, il sert à retrouver les VM à détruire
+    name: "{{ (vmname_parts + ['%02d' | format(vm_number)]) | join(vmname_separator) }}"
+    newid: "{{ vmconf_first_vmid | int + vm_number | int }}"
+
+    # Définir le network à utiliser
+    net:
+      net0: "virtio,bridge={{ vmconf_vmnet }}"
+
+    # Utiliser le stockage prévu pour les VMs
+    # storage: "{{ proxmox_storage }}"
+    pool: "{{ proxmox_pool }}"
+
+    # Demander à ce que la VM soit existente avant de passer à la prochaine
+    # VM
+    state: present
+
+    # Augmenter la timeout car copier 60Go de données prend + de 30 secondes
+    timeout: 900
+
+- name: Ajouter le disque Cloud-Init
+  # Informations de connexion à proxmox
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+    
+    # node de la VM
+    node: "{{ current_vm_node }}"
+
+    # VMid de la VM actuelle
+    vmid: "{{ vmconf_first_vmid | int + vm_number | int }}"
+
+    # Ajouter un disque
+    ide:
+      ide2: "{{ proxmox_storage }}:cloudinit"
+
+    # Proxmox considère l'ajout d'un disque comme dangereux, il faut donc
+    # autoriser les mises à jours dangereuses
+    update_unsafe: true
+
+    # Indiquer que c'est une modification de VM
+    update: true
+
+    # Contrôle que la VM existe avant de lancer la modification
+    state: present
+
+    # Augmenter le temps durant lequel cette tâche peut s'effectuer avant de
+    # timeout
+    api_timeout: 60
+
+- name: Configurer Cloud-Init
+  # Informations de connexion à proxmox
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    # node de la VM
+    node: "{{ current_vm_node }}"
+    
+    # VMid de la VM actuelle
+    vmid: "{{ vmconf_first_vmid | int + vm_number | int }}"
+    
+    # Configurations cloud-init
+    ciuser: "{{ vmconf_user }}"
+    cipassword: "{{ vmconf_password }}"
+    ipconfig:
+      ipconfig0: "ip={{ vmconf_subnet }}.{{ vm_number + 10 }}/24,gw={{ vmconf_gateway }}"
+    
+    # Indiquer que c'est une modification de VM
+    update: true
+
+- name: Appliquer les tags à la VM
+  # Informations de connexion à proxmox
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    # Annonce quant à la node à utiliser
+    node: "{{ current_vm_node }}"
+    vmid: "{{ (vmconf_first_vmid | int) + (vm_number | int) }}"
+
+    # Les tags à appliquer à la VM
+    tags:
+      - "{{ vmconf_module | lower }}"
+      - "{{ vmconf_class | lower }}"
+      - "{{ vmconf_teacher_username | lower }}"
+
+    # Indiquer que c'est une modification de VM
+    update: true
+    state: present
+
+- name: Ajouter la VM à la haute disponibilité
+  # Informations de connexion à proxmox
+  community.proxmox.proxmox_cluster_ha_resources:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: "{{ proxmox_validate_certs }}"
+
+    # Informations quant à la VM
+    name: "{{ vmconf_first_vmid | int + vm_number | int }}"
+
+    # Paramètres HA
+    state: present
+    hastate: started
+
+    max_restart: 1
+    max_relocate: 1
+
+- name: Attendre avant la prochaine VM
+  ansible.builtin.pause:
+    seconds: 10
