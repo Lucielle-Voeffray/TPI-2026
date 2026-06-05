@@ -2,9 +2,35 @@
 
 ## Concept et buts de ce document
 
+Ce document a pour but de fournir un guide quant à l'utilisation du cluster et de la codebase accompagnant ce projet.
+Ce guide part du principe que certains prérequis listés plus bas sont atteints, et ne va pas chercher à expliquer Proxmox ou Ansible.
+
 ### Public cible
 
-### 
+Ce guide s’adresse principalement aux enseignants ou aux responsables techniques de l’EMF qui doivent déployer des machines virtuelles Windows Server sur le cluster Proxmox à l’aide de la solution Ansible mise en place dans le cadre de ce TPI.
+
+Le document part du principe que l’utilisateur possède des connaissances de base en administration système, notamment sur l’utilisation d’un terminal Linux, SSH, les machines virtuelles, les adresses IP et les VLANs. Il n’a cependant pas besoin de connaître en détail le fonctionnement interne des playbooks Ansible pour utiliser la solution.
+
+Une partie du guide concerne également les administrateurs ou responsables du cluster Proxmox. Ces sections couvrent des tâches plus avancées, comme la mise à jour des nœuds, l’ajout d’un nouveau nœud au cluster, la gestion des accès ou le dépannage de l’infrastructure.
+
+Ce guide n’est pas destiné aux élèves ou aux utilisateurs finaux des machines virtuelles. Ceux-ci utilisent uniquement les VM mises à disposition par les enseignants et ne doivent pas accéder directement à Proxmox ou à la codebase Ansible.
+
+### Prérequis
+
+Voici les quelques prérequis nécessaires à l'utilisation de la codebase et du cluster
+
+#### Administrateur
+
+- Aisance avec la ligne de commande Linux
+- Connaissance du fonctionnement de Proxmox
+- Connaissance des différents mots de passe
+
+#### Utilisateur
+
+- Aisance avec la ligne de commande Linux
+- Connaissance du mot de passe du vault ansible
+- Connaissance du mot de passe SSH du container LXC
+
 
 ## Administration
 
@@ -103,6 +129,23 @@ connecter au LXC qui se trouve dans le cluster. La codebase y est déjà pull, i
 ne reste qu'à créer le fichier de configuration et lancer le venv avant de
 lancer les playbooks.
 
+Pour se connecter au LXC:
+
+`ssh ansible@10.19.59.50`
+
+Se déplacer dans le bon dossier:
+
+```bash
+cd ~/tpi-2026/ansible
+
+```
+
+Activer le venv:
+
+```bash
+.venv/bin/activate
+```
+
 #### Linux distro
 
 Si vous avez un VM Linux ou un ordinateur sous Linux, vous pouvez installer
@@ -133,15 +176,16 @@ python3 -m venv .venv
 Activer le venv:
 
 ```bash
-.venv/bin/activate
+source .venv/bin/activate
 ```
 
 Installer Ansible et les dépendences du projet:
 
 ```bash
-pip install proxmoxer requests ansible
+pip install proxmoxer
+pip install ansible
+pip install requests
 ansible-galaxy collection install -r requirements.yml
-
 ```
 
 Une fois la codebase en place, il faut créer le fichier de configuration
@@ -175,16 +219,28 @@ Les détruire est autant plus simple:
 Dry-run:
 
 ```bash
-ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass
+ansible-playbook -i inventory.yml playbooks/destroy_vm.yml --ask-vault-pass
 ```
 
 Run:
 
 ```bash
-ansible-playbook -i inventory.yml playbooks/deploy_vm.yml --ask-vault-pass -e confirm_destroy=true
+ansible-playbook -i inventory.yml playbooks/destroy_vm.yml --ask-vault-pass -e destroy_confirm=true
 ```
 
 ### Garder des logs
 
 Si vous souhaitez garder des logs de ce qui est créé, vous pouvez ajouter `>
 logs/<nom_du_fichier_de_log>.log` à la fin des commandes entionnées au dessus.
+
+## Dépannage
+Voici quelques problèmes possibles ainsi que des pistes de solutions.
+
+| Problème                            | Cause possible                       | Solution                                              |
+| ----------------------------------- | ------------------------------------ | ----------------------------------------------------- |
+| Le playbook retourne une erreur 401 | Token API faux ou expiré             | Vérifier les valeurs dans le vault Ansible            |
+| Le playbook retourne une erreur 403 | Droits Proxmox insuffisants          | Vérifier les ACL du groupe `ansible`                  |
+| La VM est créée mais ne démarre pas | Problème de template ou stockage     | Vérifier le template, le stockage et les logs Proxmox |
+| La VM n’a pas d’IP correcte         | Mauvais `vmconf_subnet` ou gateway   | Corriger `config/enseignant.yml`                      |
+| Le venv n’est pas actif             | Mauvais environnement Python         | Relancer `source .venv/bin/activate`                  |
+| Le cluster n’a plus le quorum       | Problème réseau ou nœud indisponible | Vérifier l’état du cluster et les liens réseau        |

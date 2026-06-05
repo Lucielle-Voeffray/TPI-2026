@@ -1,6 +1,10 @@
 ﻿# TPI-2026
 
-Repository for my TPI
+Respository git pour le suivi et la sauvegarde de mon projet TPI
+
+## Utilisation
+
+Pour une utilisation de cette codebase, veuillez suivre le [guide utilisateur.md](/rendu/annexes/guide_utilisateur.md).
 
 ## Fonctionnement du git durant le développement
 

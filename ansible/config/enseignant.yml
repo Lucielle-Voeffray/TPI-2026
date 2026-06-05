@@ -16,7 +16,7 @@ vmconf_class: "VR3"
 # Module enseigné
 vmconf_module: "TPI-Tests"
 
-# Nombre de VM à créer et le 1er VMid a utiliser
+# Nombre de VM à créer et le VMid a partir duquel les VMs vont être créées (exemple si 5000 la première VM sera 5001)
 vmconf_nbr_vm: 5
 vmconf_first_vmid: 5000
 
