@@ -1,0 +1,104 @@
+
+PLAY [Détruire les VMs correspondant à la configuration enseignant] ************
+
+TASK [Récupérer les machines virtuelles présentes dans le cluster] *************
+ok: [localhost]
+
+TASK [Initialiser la liste des VMs à détruire] *********************************
+ok: [localhost]
+
+TASK [Sélectionner les VMs correspondant aux tags demandés] ********************
+skipping: [localhost] => (item=tpi-vr3-template-winserv25-voeffraylucielle) 
+skipping: [localhost] => (item=tpi-vr3-template-winserv2k22-voeffraylucielle) 
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-01)
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-02)
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-03)
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-04)
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-05)
+
+TASK [Afficher les tags recherchés] ********************************************
+ok: [localhost] => {
+    "msg": "Tags recherchés : tpi-tests, vr3, voeffraylucielle"
+}
+
+TASK [Afficher les VMs qui seront détruites] ***********************************
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-01) => {
+    "msg": "VM sélectionnée : TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-01 - VMID 5001 - Nœud a41-srv-01"
+}
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-02) => {
+    "msg": "VM sélectionnée : TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-02 - VMID 5002 - Nœud a41-srv-02"
+}
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-03) => {
+    "msg": "VM sélectionnée : TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-03 - VMID 5003 - Nœud a41-srv-03"
+}
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-04) => {
+    "msg": "VM sélectionnée : TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-04 - VMID 5004 - Nœud a41-srv-01"
+}
+ok: [localhost] => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-05) => {
+    "msg": "VM sélectionnée : TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-05 - VMID 5005 - Nœud a41-srv-02"
+}
+
+TASK [Arrêter le playbook lorsqu'aucune VM ne correspond aux tags] *************
+skipping: [localhost]
+
+TASK [Vérifier que la destruction a été explicitement confirmée] ***************
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [Détruire chaque VM sélectionnée] *****************************************
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_destroy_vm.yml for localhost => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-01 (5001))
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_destroy_vm.yml for localhost => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-02 (5002))
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_destroy_vm.yml for localhost => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-03 (5003))
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_destroy_vm.yml for localhost => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-04 (5004))
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_destroy_vm.yml for localhost => (item=TPI-Tests-VR3-vm-win2k22-VoeffrayLucielle-05 (5005))
+
+TASK [Retirer la VM de la haute disponibilité] *********************************
+changed: [localhost]
+
+TASK [Arrêter la VM] ***********************************************************
+changed: [localhost]
+
+TASK [Détruire la VM et nettoyer ses références] *******************************
+changed: [localhost]
+
+TASK [Retirer la VM de la haute disponibilité] *********************************
+changed: [localhost]
+
+TASK [Arrêter la VM] ***********************************************************
+changed: [localhost]
+
+TASK [Détruire la VM et nettoyer ses références] *******************************
+changed: [localhost]
+
+TASK [Retirer la VM de la haute disponibilité] *********************************
+changed: [localhost]
+
+TASK [Arrêter la VM] ***********************************************************
+changed: [localhost]
+
+TASK [Détruire la VM et nettoyer ses références] *******************************
+changed: [localhost]
+
+TASK [Retirer la VM de la haute disponibilité] *********************************
+changed: [localhost]
+
+TASK [Arrêter la VM] ***********************************************************
+changed: [localhost]
+
+TASK [Détruire la VM et nettoyer ses références] *******************************
+changed: [localhost]
+
+TASK [Retirer la VM de la haute disponibilité] *********************************
+changed: [localhost]
+
+TASK [Arrêter la VM] ***********************************************************
+changed: [localhost]
+
+TASK [Détruire la VM et nettoyer ses références] *******************************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=26   changed=15   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,113 @@
+
+PLAY [Créer une VM à partir du template win2k22] *******************************
+
+TASK [Cloner la VM] ************************************************************
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_create_vm.yml for localhost => (item=VM numéro 1)
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_create_vm.yml for localhost => (item=VM numéro 2)
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_create_vm.yml for localhost => (item=VM numéro 3)
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_create_vm.yml for localhost => (item=VM numéro 4)
+included: /home/anya/Documents/EMF/tpi-2026/ansible/playbooks/tasks/tasks_create_vm.yml for localhost => (item=VM numéro 5)
+
+TASK [Cloner la VM] ************************************************************
+changed: [localhost]
+
+TASK [Ajouter le disque Cloud-Init] ********************************************
+changed: [localhost]
+
+TASK [Configurer Cloud-Init] ***************************************************
+changed: [localhost]
+
+TASK [Appliquer les tags à la VM] **********************************************
+changed: [localhost]
+
+TASK [Ajouter la VM à la haute disponibilité] **********************************
+changed: [localhost]
+
+TASK [Attendre avant la prochaine VM] ******************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [Cloner la VM] ************************************************************
+changed: [localhost]
+
+TASK [Ajouter le disque Cloud-Init] ********************************************
+changed: [localhost]
+
+TASK [Configurer Cloud-Init] ***************************************************
+changed: [localhost]
+
+TASK [Appliquer les tags à la VM] **********************************************
+changed: [localhost]
+
+TASK [Ajouter la VM à la haute disponibilité] **********************************
+changed: [localhost]
+
+TASK [Attendre avant la prochaine VM] ******************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [Cloner la VM] ************************************************************
+changed: [localhost]
+
+TASK [Ajouter le disque Cloud-Init] ********************************************
+changed: [localhost]
+
+TASK [Configurer Cloud-Init] ***************************************************
+changed: [localhost]
+
+TASK [Appliquer les tags à la VM] **********************************************
+changed: [localhost]
+
+TASK [Ajouter la VM à la haute disponibilité] **********************************
+changed: [localhost]
+
+TASK [Attendre avant la prochaine VM] ******************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [Cloner la VM] ************************************************************
+changed: [localhost]
+
+TASK [Ajouter le disque Cloud-Init] ********************************************
+changed: [localhost]
+
+TASK [Configurer Cloud-Init] ***************************************************
+changed: [localhost]
+
+TASK [Appliquer les tags à la VM] **********************************************
+changed: [localhost]
+
+TASK [Ajouter la VM à la haute disponibilité] **********************************
+changed: [localhost]
+
+TASK [Attendre avant la prochaine VM] ******************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [Cloner la VM] ************************************************************
+changed: [localhost]
+
+TASK [Ajouter le disque Cloud-Init] ********************************************
+changed: [localhost]
+
+TASK [Configurer Cloud-Init] ***************************************************
+changed: [localhost]
+
+TASK [Appliquer les tags à la VM] **********************************************
+changed: [localhost]
+
+TASK [Ajouter la VM à la haute disponibilité] **********************************
+changed: [localhost]
+
+TASK [Attendre avant la prochaine VM] ******************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=35   changed=25   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

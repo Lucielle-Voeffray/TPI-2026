@@ -14,22 +14,22 @@ vmconf_teacher_username: "VoeffrayLucielle"
 vmconf_class: "VR3"
 
 # Module enseigné
-vmconf_module: "TPI-Tests"
+vmconf_module: "TPI"
 
 # Nombre de VM à créer et le VMid a partir duquel les VMs vont être créées (exemple si 5000 la première VM sera 5001)
-vmconf_nbr_vm: 5
-vmconf_first_vmid: 5000
+vmconf_nbr_vm: 25
+vmconf_first_vmid: 6000
 
 # Utilisateur Administrateur des VMs et son mot de passe
 vmconf_user: "Administrator"
 vmconf_password: "Emf12345"
 
 # Enlever le # si vous voulez utiliser le VMNet1
-vmconf_vmnet: "VMNet1"
-vmconf_subnet: "10.19.56" # Le subnet ne doit pas avoir le .0/24 final
-vmconf_gateway: "10.19.56.1"
+#vmconf_vmnet: "VMNet1"
+#vmconf_subnet: "10.19.56" # Le subnet ne doit pas avoir le .0/24 final
+#vmconf_gateway: "10.19.56.1"
 
 # Enlever le # si vous voulez utiliser le VMNet2
-#vmconf_vmnet: "VMNet2"
-#vmconf_subnet: "10.19.57" # Le subnet ne doit pas avoir le .0/24 final
-#vmconf_gateway: "10.19.57.1"
+vmconf_vmnet: "VMNet2"
+vmconf_subnet: "10.19.57" # Le subnet ne doit pas avoir le .0/24 final
+vmconf_gateway: "10.19.57.1"
